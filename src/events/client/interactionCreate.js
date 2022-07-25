@@ -1,3 +1,5 @@
+const { InteractionType } = require('discord.js');
+
 module.exports = {
     name: 'interactionCreate',
 
@@ -26,6 +28,32 @@ module.exports = {
 
             try {
                 await button.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+            }
+        } else if (interaction.isSelectMenu()) {
+            const { dropdowns } = client;
+            const { customId } = interaction;
+
+            const dropdown = dropdowns.get(customId);
+
+            if (!dropdown) return new Error('There is no dropdown with this custom ID.');
+
+            try {
+                await dropdown.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+            }
+        } else if (interaction.type == InteractionType.ModalSubmit) {
+            const { modals } = client;
+            const { customId } = interaction;
+
+            const modal = modals.get(customId);
+
+            if (!modal) return new Error('There is no modal with this custom ID.');
+
+            try {
+                await modal.execute(interaction, client);
             } catch (error) {
                 console.error(error);
             }
