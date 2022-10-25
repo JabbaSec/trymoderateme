@@ -4,3 +4,5 @@
 JavaScript Discord bot created to assist moderating the TryHackMe Discord server.
 
 **Usage:** /command [option]
+
+*Bot is based solely on slash commands
