@@ -3,12 +3,14 @@ const {
   ActionRowBuilder,
   SelectMenuBuilder,
   SelectMenuOptionBuilder,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("dropdown")
-    .setDescription("Example code for Discord select menu component."),
+    .setDescription("Example code for Discord select menu component.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     const dropdown = new SelectMenuBuilder()
       .setCustomId("example-dropdown")

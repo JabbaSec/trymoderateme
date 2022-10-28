@@ -3,12 +3,14 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("button")
-    .setDescription("Example code for Discord button component."),
+    .setDescription("Example code for Discord button component.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     const button = new ButtonBuilder()
       .setLabel("Example Button")

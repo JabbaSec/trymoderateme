@@ -4,12 +4,14 @@ const {
   ActionRowBuilder,
   TextInputBuilder,
   TextInputStyle,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("modal")
-    .setDescription("Example code for Discord modal component."),
+    .setDescription("Example code for Discord modal component.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     const modal = new ModalBuilder()
       .setCustomId("example-modal")

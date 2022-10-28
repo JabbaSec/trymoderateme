@@ -3,16 +3,9 @@ module.exports = {
     name: "announce-modal",
   },
   async execute(interaction, client) {
-    // await interaction.reply({
-    //   content: `${interaction.fields.getTextInputValue("modalDescription")}
-    //     \nA new room has been released! Check it out: ${interaction.fields.getTextInputValue(
-    //       "modalRoomURL"
-    //     )}\n<@&1035262848756105297>`,
-    // });
-
     await interaction.reply({
-        content: "Done!",
-    })
+      content: "Done!",
+    });
 
     interaction.guild.channels.cache.get(process.env.BOT_LOGGING).send({
       content: `${interaction.fields.getTextInputValue("modalDescription")}
