@@ -7,7 +7,7 @@ module.exports = {
       content: "Done!",
     });
 
-    interaction.guild.channels.cache.get(process.env.BOT_LOGGING).send({
+    interaction.guild.channels.cache.get(process.env.ANNOUNCEMENTS).send({
       content: `${interaction.fields.getTextInputValue("modalDescription")}
         \nA new room has been released! Check it out: ${interaction.fields.getTextInputValue(
           "modalRoomURL"
