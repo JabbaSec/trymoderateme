@@ -11,7 +11,7 @@ module.exports = {
       content: `${interaction.fields.getTextInputValue("modalDescription")}
         \nA new room has been released! Check it out: ${interaction.fields.getTextInputValue(
           "modalRoomURL"
-        )}\n<@&1035262848756105297>`,
+        )}\n<@&${process.env.ANNOUNCEMENT_ROLE_ID}>`,
     });
   },
 };
