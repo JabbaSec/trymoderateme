@@ -6,7 +6,7 @@ const {
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
-    .setName("getAvatar")
+    .setName("Get Avatar")
     .setType(ApplicationCommandType.User)
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
