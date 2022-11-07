@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { connect } = require("mongoose");
 
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
@@ -26,3 +27,7 @@ client.handleCommands();
 client.handleComponents();
 
 client.login(process.env.DISCORD_TOKEN);
+
+(async () => {
+  connect("mongodb://127.0.0.1:27017/").catch(console.error);
+})();

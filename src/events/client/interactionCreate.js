@@ -7,7 +7,7 @@ module.exports = {
     if (interaction.isChatInputCommand()) {
       const { commands } = client;
       const { commandName } = interaction;
-      
+
       const command = commands.get(commandName);
 
       if (!command) return;
