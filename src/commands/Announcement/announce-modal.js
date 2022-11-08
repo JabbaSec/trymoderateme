@@ -18,14 +18,15 @@ module.exports = {
       .setTitle("Announcement");
 
     const roomInput = new TextInputBuilder()
-      .setCustomId("modalRoomURL")
-      .setLabel("Room URL")
+      .setCustomId("modalRoomCode")
+      .setLabel("Room Code")
       .setRequired(true)
       .setStyle(TextInputStyle.Short);
 
     const descriptionInput = new TextInputBuilder()
-      .setCustomId("modalDescription")
-      .setLabel("Description *Note will appear above URL")
+      .setCustomId("modalTitle")
+      .setLabel("Add some text *Note will appear first")
+      .setRequired(false)
       .setStyle(TextInputStyle.Paragraph);
 
     modal.addComponents(new ActionRowBuilder().addComponents(roomInput));
