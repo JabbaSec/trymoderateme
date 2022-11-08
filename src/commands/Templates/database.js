@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const Warning = require("../../events/mongo/schema/Warning");
+const Warning = require("../../events/mongo/schema/warning");
 
 module.exports = {
   data: new SlashCommandBuilder()
