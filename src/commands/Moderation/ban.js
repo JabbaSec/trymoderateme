@@ -35,7 +35,7 @@ module.exports = {
           ephemeral: true,
         });
 
-      await interaction.reply({ content: `You are now banned.` });
+      await interaction.reply({ content: `You are now banned. https://tenor.com/view/bongocat-banhammer-ban-hammer-bongo-gif-18219363` });
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,
