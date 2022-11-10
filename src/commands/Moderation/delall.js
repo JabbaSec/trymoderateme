@@ -44,7 +44,7 @@ module.exports = {
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
 
-      if (interaction.options.getSubcommand() === 'warnings') {
+      if (interaction.options.getSubcommand() === "warnings") {
         findData = await Warning.deleteMany({ userID: user.id });
       } else {
         findData = await Note.deleteMany({ userID: user.id });

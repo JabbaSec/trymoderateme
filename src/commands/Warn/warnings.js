@@ -42,7 +42,7 @@ module.exports = {
         });
       });
 
-      interaction.reply({embeds: [warningsEmbed] });
+      interaction.reply({ embeds: [warningsEmbed] });
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,

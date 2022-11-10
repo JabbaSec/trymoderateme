@@ -9,9 +9,7 @@ const Note = require("../../events/mongo/schema/note");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("notes")
-    .setDescription(
-      "Retrive all the notes for a set user from the database."
-    )
+    .setDescription("Retrive all the notes for a set user from the database.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .addUserOption((option) =>
       option
@@ -33,16 +31,16 @@ module.exports = {
         .setTitle(`Total: ${findNotes.length}`)
         .setColor("#ffff00");
 
-        findNotes.forEach((note) => {
+      findNotes.forEach((note) => {
         notesEmbed.addFields({
           name: `ID #${note._id}`,
           value: `Moderator: ${interaction.guild.members.cache.get(
             note.moderatorID
-          )}\nDate: ${note.date}\Note: ${note.note}`,
+          )}\nDate: ${note.date}\nNote: ${note.note}`,
         });
       });
 
-      interaction.reply({embeds: [notesEmbed] });
+      interaction.reply({ embeds: [notesEmbed] });
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,

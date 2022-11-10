@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 const Warning = require("../../events/mongo/schema/warning");
 
 module.exports = {
@@ -24,7 +24,9 @@ module.exports = {
       if (ObjectId.isValid(id)) {
         let findWarning = await Warning.findOneAndDelete({ _id: id });
         if (findWarning) {
-          await interaction.reply({ content: "Warning has been removed successfully." });
+          await interaction.reply({
+            content: "Warning has been removed successfully.",
+          });
         } else {
           await interaction.reply({
             content: "Could not find a warning with that ID.",
@@ -32,7 +34,11 @@ module.exports = {
           });
         }
       } else {
-        await interaction.reply({content: "That ID does not seem to be correct. Did you copy it right?", ephemeral: true,})
+        await interaction.reply({
+          content:
+            "That ID does not seem to be correct. Did you copy it right?",
+          ephemeral: true,
+        });
       }
     } else {
       await interaction.reply({
