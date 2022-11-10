@@ -1,11 +1,11 @@
 const { Schema, model, SchemaType } = require("mongoose");
 
-const warningSchema = new Schema({
+const noteSchema = new Schema({
   _id: Schema.Types.ObjectId,
   userID: String,
   moderatorID: String,
-  reason: String,
+  note: String,
   date: Schema.Types.Date,
 });
 
-module.exports = model("Warning", warningSchema, "warnings");
+module.exports = model("Note", noteSchema, "notes");
