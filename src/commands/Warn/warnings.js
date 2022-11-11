@@ -38,9 +38,9 @@ module.exports = {
           name: `ID #${warning._id}`,
           value: `**Moderator:** ${interaction.guild.members.cache.get(
             warning.moderatorID
-          )}\n${warning.date.toLocaleDateString()}\n**Reason:** ${
+          )}\n${warning.date.toLocaleDateString()}\n**Reason:** \`${
             warning.reason
-          }`,
+          }\``,
         });
       });
 
