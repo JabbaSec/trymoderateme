@@ -36,9 +36,11 @@ module.exports = {
       findWarnings.forEach((warning) => {
         warningsEmbed.addFields({
           name: `ID #${warning._id}`,
-          value: `Moderator: ${interaction.guild.members.cache.get(
+          value: `**Moderator:** ${interaction.guild.members.cache.get(
             warning.moderatorID
-          )}\nDate: ${warning.date}\nReason: ${warning.reason}`,
+          )}\n${warning.date.toLocaleDateString()}\n**Reason:** ${
+            warning.reason
+          }`,
         });
       });
 

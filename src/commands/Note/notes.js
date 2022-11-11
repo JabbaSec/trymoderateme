@@ -34,9 +34,9 @@ module.exports = {
       findNotes.forEach((note) => {
         notesEmbed.addFields({
           name: `ID #${note._id}`,
-          value: `Moderator: ${interaction.guild.members.cache.get(
+          value: `**Moderator:** ${interaction.guild.members.cache.get(
             note.moderatorID
-          )}\nDate: ${note.date}\nNote: ${note.note}`,
+          )}\n${note.date.toLocaleDateString()}\n**Note:** ${note.note}`,
         });
       });
 
