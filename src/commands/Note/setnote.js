@@ -47,7 +47,7 @@ module.exports = {
         .setFields([
           {
             name: `${user.tag}`,
-            value: `${note}`,
+            value: `\`${note}\``,
           },
         ]);
 
