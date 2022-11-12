@@ -46,7 +46,7 @@ module.exports = {
         .setColor("#ff0000")
         .setThumbnail(`${user.displayAvatarURL()}`)
         .setTitle(":warning: Warning")
-        .setFooter({ text: `${newWarning._id}` })
+        .setFooter({ text: `\`{newWarning._id}\`` })
         .setFields([
           {
             name: `${user.tag}`,
