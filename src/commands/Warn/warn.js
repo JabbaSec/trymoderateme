@@ -50,7 +50,7 @@ module.exports = {
         .setFields([
           {
             name: `${user.tag}`,
-            value: `\`${reason}\``,
+            value: `${reason}`,
           },
         ]);
 
@@ -59,7 +59,7 @@ module.exports = {
         .send({ embeds: [warningEmbed] });
 
       await user
-        .send({ content: `:warning: You have been warned!\nReason: \`${reason}\`` })
+        .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
         .catch(console.log);
 
       await interaction.reply({

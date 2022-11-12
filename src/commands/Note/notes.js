@@ -36,7 +36,7 @@ module.exports = {
           name: `ID #${note._id}`,
           value: `**Moderator:** ${interaction.guild.members.cache.get(
             note.moderatorID
-          )}\n${note.date.toISOString()}\n**Note:** \`${note.note}\``,
+          )}\n**Note:** ${note.note}\n\`${note.date.toISOString()}\``,
         });
       });
 
