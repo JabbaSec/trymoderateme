@@ -60,7 +60,7 @@ module.exports = {
 
       await user
         .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
-        .catch(console.log);
+        .catch((err) => console.log(`[WARN] Cannot DM ${user.tag}`));
 
       await interaction.reply({
         content: `${user} has been warned.`,
