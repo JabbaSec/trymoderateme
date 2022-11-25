@@ -19,15 +19,13 @@ module.exports = {
       option
         .setName("reason")
         .setDescription("The reason for banning the user.")
-        .setRequired(false)
+        .setRequired(true)
     ),
   async execute(interaction, client) {
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
       const member = interaction.options.getMember("user");
-      let reason = interaction.options.getString("reason");
-
-      if (!reason) reason = "No reason provided.";
+      const reason = interaction.options.getString("reason");
 
       if (member) {
         if (!member.bannable || null)
@@ -54,7 +52,7 @@ module.exports = {
         })
         .setColor("#ff0000")
         .setThumbnail(`${user.displayAvatarURL()}`)
-        .setTitle(`:hammer: Banned ${user.tag}`)
+        .setTitle(`:hammer: Banned ${user.tag} \n(${user.id})`)
         .setFields([
           {
             name: `Reason`,
@@ -79,12 +77,6 @@ module.exports = {
       await user
         .send({ embeds: [dmEmbed] })
         .catch((err) => console.log(`[BAN] Cannot DM ${user.tag}`));
-
-      await interaction.guild.members.ban(user.id);
-
-      interaction.guild.channels.cache
-        .get(process.env.BOT_LOGGING)
-        .send({ embeds: [banEmbed] });
 
       await interaction.reply({
         content: `:hammer: ${user.tag} has been banned.`,

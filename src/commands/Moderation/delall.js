@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
-const { ObjectId } = require("mongodb");
+
 const Note = require("../../events/mongo/schema/note");
 const Warning = require("../../events/mongo/schema/warning");
 

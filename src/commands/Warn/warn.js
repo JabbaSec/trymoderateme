@@ -56,7 +56,7 @@ module.exports = {
 
       interaction.guild.channels.cache
         .get(process.env.BOT_LOGGING)
-        .send({ embeds: [warningEmbed] });
+        .send({ embeds: [warningEmbed] }).catch((err) => console.log("[WARN] Error with sending the embed."));
 
       await user
         .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
