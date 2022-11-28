@@ -58,15 +58,14 @@ module.exports = {
         .get(process.env.BOT_LOGGING)
         .send({ embeds: [warningEmbed] }).catch((err) => console.log("[WARN] Error with sending the embed."));
 
-      await user
-        .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
-        .catch((err) => console.log(`[WARN] Cannot DM ${user.tag}`));
-
       await interaction.reply({
         content: `${user} has been warned.`,
-      });
+      })
 
-      console.log(newWarning);
+      await user
+      .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
+      .catch((err) => interaction.followUp({content: `[WARNING] I cannot DM that user.`}));
+
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,
