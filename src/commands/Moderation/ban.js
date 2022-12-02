@@ -24,8 +24,9 @@ module.exports = {
   async execute(interaction, client) {
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
-      const member = interaction.options.getMember("user");
       const reason = interaction.options.getString("reason");
+
+      const member = await interaction.guild.members.fetch(user.id);
 
       if (member) {
         if (!member.bannable || null)
@@ -74,9 +75,11 @@ module.exports = {
           },
         ]);
 
-      await user
-        .send({ embeds: [dmEmbed] })
-        .catch((err) => console.log(`[BAN] Cannot DM ${user.tag}`));
+      // await user
+      //   .send({ embeds: [dmEmbed] })
+      //   .catch((err) => console.log(`[BAN] Cannot DM ${user.tag}`));
+
+      member.ban({ reason: reason, deleteMessageSeconds: 3 * 24 * 60 * 60 });
 
       await interaction.reply({
         content: `:hammer: ${user.tag} has been banned.`,

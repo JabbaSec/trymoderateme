@@ -53,7 +53,8 @@ module.exports = {
 
       interaction.guild.channels.cache
         .get(process.env.BOT_LOGGING)
-        .send({ embeds: [noteEmbed] }).catch((err) => console.log("[NOTES] Error with sending embed."));
+        .send({ embeds: [noteEmbed] })
+        .catch((err) => console.log("[NOTES] Error with sending embed."));
 
       await interaction.reply({
         content: `Note has successfully been added.`,

@@ -3,6 +3,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+
 const { default: mongoose } = require("mongoose");
 const Warning = require("../../events/mongo/schema/warning");
 
@@ -56,16 +57,18 @@ module.exports = {
 
       interaction.guild.channels.cache
         .get(process.env.BOT_LOGGING)
-        .send({ embeds: [warningEmbed] }).catch((err) => console.log("[WARN] Error with sending the embed."));
+        .send({ embeds: [warningEmbed] })
+        .catch((err) => console.log("[WARN] Error with sending the embed."));
 
       await interaction.reply({
         content: `${user} has been warned.`,
-      })
+      });
 
       await user
-      .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
-      .catch((err) => interaction.followUp({content: `[WARNING] I cannot DM that user.`}));
-
+        .send({ content: `:warning: You have been warned!\nReason: ${reason}` })
+        .catch((err) =>
+          interaction.followUp({ content: `[WARNING] I cannot DM that user.` })
+        );
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,
