@@ -8,7 +8,7 @@ module.exports = {
   name: "guildMemberAdd",
 
   async execute(member, interaction) {
-    let findMute = await Mute.find({ userID: member.id });
+    let findMute = await Mute.findOne({ userID: member.id });
 
     if (findMute) {
       console.log(findMute);
