@@ -8,9 +8,10 @@ module.exports = {
   name: "guildMemberAdd",
 
   async execute(member, interaction) {
-    let findMute = await Mute.findOne({ userID: member.id });
+    let findMute = await Mute.find({ userID: member.id });
 
     if (findMute) {
+      console.log(findMute);
       const mutedRole = member.guild.roles.cache.get(process.env.MUTED_ROLE_ID);
 
       console.log(`${member.tag} tried to evade a mute.`);
