@@ -12,12 +12,6 @@ module.exports = {
     .setName("delall")
     .setDescription("Deletes *all* warnings for a selected user *irreversible")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-    //   .addUserOption((option) =>
-    //   option
-    //     .setName('user')
-    //     .setDescription('User of whom is having a fresh slate.')
-    //     .setRequired(true)
-    // ),
     .addSubcommand((subcommand) =>
       subcommand
         .setName("warnings")

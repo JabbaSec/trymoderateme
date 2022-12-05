@@ -19,9 +19,6 @@ module.exports = {
         .get(process.env.RULES)
         .send({ embeds: [ruleEmbed] });
     });
-
-    // console.log(rawdata.rules[1]);
-
     await interaction.reply({ content: `Done!` });
   },
 };

@@ -129,6 +129,7 @@ module.exports = {
               console.log("[MUTE] Error with sending the left embed.")
             )
         );
+
         let removeMute = await Mute.findOneAndDelete({ userID: user.id });
 
         interaction.guild.channels.cache
@@ -140,7 +141,7 @@ module.exports = {
       newMute = await new Mute({
         _id: timerId,
         userID: user.id,
-        reason: reason,
+        length: ms(`${duration}`),
         date: Date.now(),
       });
 

@@ -4,7 +4,7 @@ const muteSchema = new Schema({
   _id: Number,
   userID: String,
   muteID: String,
-  reason: String,
+  length: String,
   date: Schema.Types.Date,
 });
 
