@@ -22,6 +22,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
+    return interaction.reply({content: `:negative_squared_cross_mark: Sorry! This command is disabled for the time being.`})
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
