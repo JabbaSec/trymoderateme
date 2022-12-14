@@ -22,12 +22,14 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    return interaction.reply({content: `:negative_squared_cross_mark: Sorry! This command is disabled for the time being.`})
+    // return interaction.reply({content: `:negative_squared_cross_mark: Sorry! This command is disabled for the time being.`})
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
 
-      const member = await interaction.guild.members.fetch(user.id);
+      const member = await interaction.guild.members
+        .fetch(user.id)
+        .catch((err) => console.log(`[BAN] Cannot find user in the server.`));
 
       if (member) {
         if (!member.bannable || null)
@@ -76,15 +78,30 @@ module.exports = {
           },
         ]);
 
-      // await user
-      //   .send({ embeds: [dmEmbed] })
-      //   .catch((err) => console.log(`[BAN] Cannot DM ${user.tag}`));
+      await user
+        .send({ embeds: [dmEmbed] })
+        .catch((err) => console.log(`[BAN] Cannot DM ${user.tag}`));
 
-      member.ban({ reason: reason, deleteMessageSeconds: 3 * 24 * 60 * 60 });
+      interaction.guild.channels.cache
+        .get(process.env.BOT_LOGGING)
+        .send({ embeds: [banEmbed] })
+        .catch((err) => console.log("[BAN] Error with sending the embed."));
 
       await interaction.reply({
         content: `:hammer: ${user.tag} has been banned.`,
       });
+
+      try {
+        member.ban({ reason: reason, deleteMessageSeconds: 7 * 24 * 60 * 60 });
+      } catch {
+        interaction.guild.members.ban(user, {
+          reason: reason,
+          deleteMessageSeconds: 7 * 24 * 60 * 60,
+        });
+        interaction.followUp({
+          content: `[BAN] User left the discord server.`,
+        });
+      }
     } else {
       await interaction.reply({
         content: `Nice try! You are not a moderator`,

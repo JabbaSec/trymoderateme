@@ -1,0 +1,61 @@
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+  EmbedBuilder,
+} = require("discord.js");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("unban")
+    .setDescription("Revokes the ban of a selected member.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to be unbanned.")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("The reason for unbanning the user.")
+        .setRequired(true)
+    ),
+  async execute(interaction, client) {
+    if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
+      const user = interaction.options.getUser("user");
+      const reason = interaction.options.getString("reason");
+
+      const unbanEmbed = new EmbedBuilder()
+        .setAuthor({
+          name: `${interaction.user.tag}`,
+          iconURL: interaction.member.displayAvatarURL(),
+        })
+        .setColor("#00ff00")
+        .setThumbnail(`${user.displayAvatarURL()}`)
+        .setTitle(`:unlock: Unbanned ${user.tag} \n(${user.id})`)
+        .setFields([
+          {
+            name: `Reason`,
+            value: `${reason}`,
+          },
+        ]);
+
+      interaction.guild.channels.cache
+        .get(process.env.BOT_LOGGING)
+        .send({ embeds: [unbanEmbed] })
+        .catch((err) => console.log("[UNBAN] Error with sending the embed."));
+
+      interaction.guild.members.unban(user);
+
+      await interaction.reply({
+        content: `:unlock: ${user.tag} has been unbanned.`,
+      });
+    } else {
+      await interaction.reply({
+        content: `Nice try! You are not a moderator`,
+        ephemeral: true,
+      });
+    }
+  },
+};
