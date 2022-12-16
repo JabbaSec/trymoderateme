@@ -20,12 +20,25 @@ module.exports = {
         .setName("reason")
         .setDescription("The reason for banning the user.")
         .setRequired(true)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("delete_messages")
+        .setDescription("Delete user messages")
+        .setRequired(true)
     ),
   async execute(interaction, client) {
-    // return interaction.reply({content: `:negative_squared_cross_mark: Sorry! This command is disabled for the time being.`})
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
+      const deleteMessageSeconds =
+        interaction.options.getBoolean("delete_messages");
+
+      if (deleteMessageSeconds) {
+        deleteMessages = 7 * 24 * 60 * 60;
+      } else {
+        deleteMessages = 0;
+      }
 
       const member = await interaction.guild.members
         .fetch(user.id)
@@ -92,11 +105,11 @@ module.exports = {
       });
 
       try {
-        member.ban({ reason: reason, deleteMessageSeconds: 7 * 24 * 60 * 60 });
+        member.ban({ reason: reason, deleteMessageSeconds: deleteMessages });
       } catch {
         interaction.guild.members.ban(user, {
           reason: reason,
-          deleteMessageSeconds: 7 * 24 * 60 * 60,
+          deleteMessageSeconds: deleteMessages,
         });
         interaction.followUp({
           content: `[BAN] User left the discord server.`,
