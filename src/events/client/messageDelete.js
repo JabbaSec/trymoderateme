@@ -5,7 +5,7 @@ module.exports = {
   name: "messageDelete",
 
   async execute(message, client) {
-    if (oldMessage.author.bot) return;
+    if (message.author.bot) return;
 
     return;
 
