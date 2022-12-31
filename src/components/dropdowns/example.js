@@ -4,7 +4,7 @@ module.exports = {
     description: "This is an example dropdown.",
   },
   async execute(interaction, client) {
-    await interaction.editReply({
+    await interaction.reply({
       content: `You have selected: ${interaction.values[0]}`,
     });
   },

@@ -4,6 +4,6 @@ module.exports = {
   },
 
   async execute(interaction, client) {
-    await interaction.editReply({ content: "This is an example button." });
+    await interaction.reply({ content: "This is an example button." });
   },
 };

@@ -3,7 +3,7 @@ module.exports = {
     name: "example-modal",
   },
   async execute(interaction, client) {
-    await interaction.editReply({
+    await interaction.reply({
       content: `You selected option ${interaction.fields.getTextInputValue(
         "exampleModalInput"
       )}`,
