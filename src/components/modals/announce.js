@@ -34,7 +34,7 @@ module.exports = {
         console.log(error);
       });
 
-    await interaction.reply({
+    await interaction.editReply({
       content: "Done!",
     });
   },

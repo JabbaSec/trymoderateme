@@ -45,17 +45,17 @@ module.exports = {
       }
 
       if (findData) {
-        await interaction.reply({
+        await interaction.editReply({
           content: "All data has been successfully erased.",
         });
       } else {
-        await interaction.reply({
+        await interaction.editReply({
           content: "That user does not have any corresponding data.",
           ephemeral: true,
         });
       }
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

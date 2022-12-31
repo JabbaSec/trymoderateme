@@ -48,7 +48,7 @@ module.exports = {
 
       if (member) {
         if (!member.bannable || null)
-          return interaction.reply({
+          return interaction.editReply({
             content: "I am having some trouble with muting this member.",
             ephemeral: true,
           });
@@ -58,14 +58,14 @@ module.exports = {
             interaction.member.roles.highest.position ||
           null
         )
-          return interaction.reply({
+          return interaction.editReply({
             content: "User's permissions are the same as or higher than yours.",
             ephemeral: true,
           });
       }
 
       if (!member) {
-        return interaction.reply({
+        return interaction.editReply({
           content: "I cannot find that user in the discord server.",
         });
       }
@@ -147,7 +147,7 @@ module.exports = {
 
       await newMute.save().catch(console.error);
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `:mute: ${user.tag} has been muted.`,
       });
 
@@ -166,7 +166,7 @@ module.exports = {
           interaction.followUp({ content: `[MUTE] I cannot DM that user.` })
         );
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

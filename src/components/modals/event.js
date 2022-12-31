@@ -21,7 +21,7 @@ module.exports = {
         \n<@&${process.env.ANNOUNCEMENT_ROLE_ID}>`,
     });
 
-    await interaction.reply({
+    await interaction.editReply({
       content: "Done!",
     });
   },

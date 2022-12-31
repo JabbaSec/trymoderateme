@@ -11,7 +11,7 @@ module.exports = {
       const ruleEmbed = new EmbedBuilder().setColor("#ffff00").setFields([
         {
           name: `Rule ${rule.id}`,
-          value: `${rule.text}`,
+          value: `\`\`\`${rule.text}\`\`\``,
         },
       ]);
 

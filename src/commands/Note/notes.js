@@ -40,9 +40,9 @@ module.exports = {
         });
       });
 
-      interaction.reply({ embeds: [notesEmbed] });
+      interaction.editReply({ embeds: [notesEmbed] });
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

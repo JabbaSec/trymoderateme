@@ -28,7 +28,7 @@ module.exports = {
 
       if (member) {
         if (!member.bannable || null)
-          return interaction.reply({
+          return interaction.editReply({
             content: "I am having some trouble with banning this member.",
             ephemeral: true,
           });
@@ -38,7 +38,7 @@ module.exports = {
             interaction.member.roles.highest.position ||
           null
         )
-          return interaction.reply({
+          return interaction.editReply({
             content: "User's permissions are the same as or higher than yours.",
             ephemeral: true,
           });
@@ -70,7 +70,7 @@ module.exports = {
         .send({ embeds: [banEmbed] })
         .catch((err) => console.log("[BANSPAM] Error with sending the embed."));
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `Done!`,
       });
 
@@ -89,7 +89,7 @@ module.exports = {
         });
       }
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

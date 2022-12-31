@@ -5,9 +5,6 @@ module.exports = {
     .setName("ping")
     .setDescription("Returns client and API latency."),
   async execute(interaction, client) {
-    const message = await interaction.deferReply({
-      fetchReply: true,
-    });
 
     const pingEmbed = new EmbedBuilder()
       .setTitle("Pong!")
@@ -21,7 +18,7 @@ module.exports = {
         },
         {
           name: "Client Latency",
-          value: `${message.createdTimestamp - interaction.createdTimestamp}ms`,
+          value: `${Date.now() - interaction.createdTimestamp}ms`,
         },
       ]);
 

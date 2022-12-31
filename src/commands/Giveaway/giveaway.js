@@ -33,7 +33,7 @@ module.exports = {
       const prize_amount = interaction.options.getInteger("prize_amount");
       const prize = interaction.options.getString("prize");
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

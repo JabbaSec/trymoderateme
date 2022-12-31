@@ -13,6 +13,7 @@ module.exports = {
       if (!command) return;
 
       try {
+        await interaction.deferReply();
         await command.execute(interaction, client);
       } catch (error) {
         console.error(error);

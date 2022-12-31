@@ -15,9 +15,9 @@ module.exports = {
       .catch(console.error);
 
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
-      await interaction.reply({ content: `You have the ${role.name} role.` });
+      await interaction.editReply({ content: `You have the ${role.name} role.` });
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `You do not have the ${role.name} role.`,
       });
     }

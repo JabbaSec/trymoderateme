@@ -48,11 +48,11 @@ module.exports = {
 
       interaction.guild.members.unban(user);
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `:unlock: ${user.tag} has been unbanned.`,
       });
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

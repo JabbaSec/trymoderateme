@@ -60,7 +60,7 @@ module.exports = {
         .send({ embeds: [warningEmbed] })
         .catch((err) => console.log("[WARN] Error with sending the embed."));
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `${user} has been warned.`,
       });
 
@@ -70,7 +70,7 @@ module.exports = {
           interaction.followUp({ content: `[WARNING] I cannot DM that user.` })
         );
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

@@ -17,7 +17,7 @@ module.exports = {
       .setCustomId("example-button")
       .setStyle(ButtonStyle.Primary);
 
-    await interaction.reply({
+    await interaction.editReply({
       components: [new ActionRowBuilder().addComponents(button)],
     });
   },

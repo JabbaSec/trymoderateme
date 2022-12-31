@@ -27,7 +27,7 @@ module.exports = {
         })
       );
 
-    await interaction.reply({
+    await interaction.editReply({
       components: [new ActionRowBuilder().addComponents(dropdown)],
     });
   },

@@ -24,24 +24,24 @@ module.exports = {
       if (ObjectId.isValid(id)) {
         let findNote = await Note.findOneAndDelete({ _id: id });
         if (findNote) {
-          await interaction.reply({
+          await interaction.editReply({
             content: "Note has been removed successfully.",
           });
         } else {
-          await interaction.reply({
+          await interaction.editReply({
             content: "Could not find a note with that ID.",
             ephemeral: true,
           });
         }
       } else {
-        await interaction.reply({
+        await interaction.editReply({
           content:
             "That ID does not seem to be correct. Did you copy it right?",
           ephemeral: true,
         });
       }
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

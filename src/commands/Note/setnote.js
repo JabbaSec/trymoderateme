@@ -56,13 +56,13 @@ module.exports = {
         .send({ embeds: [noteEmbed] })
         .catch((err) => console.log("[NOTES] Error with sending embed."));
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `Note has successfully been added.`,
       });
 
       console.log(newNote);
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

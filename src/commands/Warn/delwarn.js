@@ -24,24 +24,24 @@ module.exports = {
       if (ObjectId.isValid(id)) {
         let findWarning = await Warning.findOneAndDelete({ _id: id });
         if (findWarning) {
-          await interaction.reply({
+          await interaction.editReply({
             content: "Warning has been removed successfully.",
           });
         } else {
-          await interaction.reply({
+          await interaction.editReply({
             content: "Could not find a warning with that ID.",
             ephemeral: true,
           });
         }
       } else {
-        await interaction.reply({
+        await interaction.editReply({
           content:
             "That ID does not seem to be correct. Did you copy it right?",
           ephemeral: true,
         });
       }
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

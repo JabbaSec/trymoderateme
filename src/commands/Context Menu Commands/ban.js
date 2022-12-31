@@ -11,11 +11,11 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
-      await interaction.reply({
+      await interaction.editReply({
         content: `You are now banned ${interaction.targetUser}`,
       });
     } else {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Nice try! You are not a moderator`,
         ephemeral: true,
       });

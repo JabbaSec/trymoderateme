@@ -10,7 +10,7 @@ module.exports = {
     .setType(ApplicationCommandType.User)
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
-    await interaction.reply({
+    await interaction.editReply({
       content: `Your avatar is: ${interaction.targetUser.displayAvatarURL()}`,
     });
   },
