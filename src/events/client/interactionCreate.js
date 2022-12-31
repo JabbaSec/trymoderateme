@@ -12,6 +12,8 @@ module.exports = {
 
       if (!command) return;
 
+      if (!interaction.guild) return;
+
       try {
         await interaction.deferReply();
         await command.execute(interaction, client);
