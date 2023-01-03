@@ -15,8 +15,12 @@ module.exports = {
       if (!interaction.guild) return;
 
       try {
-        await interaction.deferReply();
-        await command.execute(interaction, client);
+        if (commandName == "announce") {
+          await command.execute(interaction, client);
+        } else {
+          await interaction.deferReply();
+          await command.execute(interaction, client);
+        }
       } catch (error) {
         console.error(error);
         await interaction.reply({

@@ -1,6 +1,4 @@
-const {
-  EmbedBuilder,
-} = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 
 module.exports = {
@@ -10,8 +8,8 @@ module.exports = {
     if (oldMessage.author.bot) return;
 
     return;
-    
-      const editEmbed = new EmbedBuilder()
+
+    const editEmbed = new EmbedBuilder()
       .setAuthor({
         name: `${newMessage.author.tag}`,
         iconURL: newMessage.author.displayAvatarURL(),
@@ -19,12 +17,12 @@ module.exports = {
       .setColor("#ffa500")
       .setThumbnail(`${newMessage.author.displayAvatarURL()}`)
       .setTitle(`:recycle: Edited Message`)
-      .setFooter({text: `${newMessage.createdAt}`})
+      .setFooter({ text: `${newMessage.createdAt}` })
       .setFields([
-          {
-              name: `Channel`,
-              value: `<#${newMessage.channel.id}>`,
-          },
+        {
+          name: `Channel`,
+          value: `<#${newMessage.channel.id}>`,
+        },
         {
           name: `Original Message`,
           value: `${oldMessage.content}`,
@@ -35,7 +33,7 @@ module.exports = {
         },
       ]);
 
-      client.channels.cache
+    client.channels.cache
       .get(process.env.BOT_LOGGING)
       .send({ embeds: [editEmbed] })
       .catch((err) => console.log("[EDIT] Error with sending the embed."));

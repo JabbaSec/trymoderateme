@@ -5,7 +5,6 @@ module.exports = {
     .setName("ping")
     .setDescription("Returns client and API latency."),
   async execute(interaction, client) {
-
     const pingEmbed = new EmbedBuilder()
       .setTitle("Pong!")
       .setColor("#00ff00")
