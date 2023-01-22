@@ -23,11 +23,19 @@ module.exports = {
           name: `Channel`,
           value: `<#${message.channel.id}>`,
         },
-        {
+      ]);
+
+      const messageHadText = message.content;
+      if (messageHadText) {
+        deleteEmbed.addFields({
           name: `Message`,
           value: `${message.content}`,
-        },
-      ]);
+        })
+      }
+
+      const messageHadAttachment = message.attachments.first()
+      if (messageHadAttachment) deleteEmbed.setImage(messageHadAttachment.proxyURL)
+  
 
     client.channels.cache
       .get(process.env.BOT_LOGGING)

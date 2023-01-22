@@ -15,7 +15,7 @@ module.exports = {
       if (!interaction.guild) return;
 
       try {
-        if (commandName == "announce") {
+        if (commandName == "announce" || commandName == "giveaway") {
           await command.execute(interaction, client);
         } else {
           await interaction.deferReply();
