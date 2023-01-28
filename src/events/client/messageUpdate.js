@@ -7,6 +7,8 @@ module.exports = {
   async execute(oldMessage, newMessage, client) {
     if (oldMessage.author.bot) return;
 
+    if (oldMessage.content.replace(/[&\/\\#,+()$~%.'":*?<>{}\s+]/g, '') == newMessage.content.replace(/[&\/\\#,+()$~%.'":*?<>{}\s+]/g, '')) return;
+
     const editEmbed = new EmbedBuilder()
       .setAuthor({
         name: `${newMessage.author.tag}`,
