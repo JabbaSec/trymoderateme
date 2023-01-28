@@ -7,8 +7,6 @@ module.exports = {
   async execute(message, client) {
     if (message.author.bot) return;
 
-    return;
-
     const deleteEmbed = new EmbedBuilder()
       .setAuthor({
         name: `${message.author.tag}`,
@@ -38,7 +36,7 @@ module.exports = {
   
 
     client.channels.cache
-      .get(process.env.BOT_LOGGING)
+      .get(process.env.DELETED_MESSAGES)
       .send({ embeds: [deleteEmbed] })
       .catch((err) => console.log("[DELETE] Error with sending the embed."));
   },

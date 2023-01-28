@@ -7,8 +7,6 @@ module.exports = {
   async execute(oldMessage, newMessage, client) {
     if (oldMessage.author.bot) return;
 
-    return;
-
     const editEmbed = new EmbedBuilder()
       .setAuthor({
         name: `${newMessage.author.tag}`,
@@ -34,7 +32,7 @@ module.exports = {
       ]);
 
     client.channels.cache
-      .get(process.env.BOT_LOGGING)
+      .get(process.env.DELETED_MESSAGES)
       .send({ embeds: [editEmbed] })
       .catch((err) => console.log("[EDIT] Error with sending the embed."));
   },
