@@ -27,7 +27,7 @@ module.exports = {
       if (messageHadText) {
         deleteEmbed.addFields({
           name: `Message`,
-          value: `${message.content}`,
+          value: `${message.content.substring(0,1023)}`,
         })
       }
 

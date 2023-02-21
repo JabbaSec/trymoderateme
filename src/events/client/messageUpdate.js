@@ -8,7 +8,7 @@ module.exports = {
     return; 
     if (oldMessage.author.bot) return;
 
-    if (oldMessage.content.replace(/[&\/\\#,+()$~%.'":*?<>{}\s+]/g, '') == newMessage.content.replace(/[&\/\\#,+()$~%.'":*?<>{}\s+]/g, '')) return;
+    if (oldMessage.content.replace(/[&\/\\#,+()$~%.'"`_-:*?<>{}\s+]/g, '') == newMessage.content.replace(/[&\/\\#,+()$~%.'"`_-:*?<>{}\s+]/g, '')) return;
 
     const editEmbed = new EmbedBuilder()
       .setAuthor({

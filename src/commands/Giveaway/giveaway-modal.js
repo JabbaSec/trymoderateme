@@ -16,6 +16,12 @@ module.exports = {
     const modal = new ModalBuilder()
       .setCustomId("giveaway-modal")
       .setTitle("Giveaway Setup");
+      
+    const descriptionInput = new TextInputBuilder()
+      .setCustomId("modalDescription")
+      .setLabel("Add an announcement to your giveaway!")
+      .setRequired(false)
+      .setStyle(TextInputStyle.Short);
 
     const durationInput = new TextInputBuilder()
       .setCustomId("modalDuration")
@@ -35,6 +41,7 @@ module.exports = {
       .setRequired(true)
       .setStyle(TextInputStyle.Paragraph);
 
+    modal.addComponents(new ActionRowBuilder().addComponents(descriptionInput));
     modal.addComponents(new ActionRowBuilder().addComponents(durationInput));
     modal.addComponents(new ActionRowBuilder().addComponents(amountInput));
     modal.addComponents(new ActionRowBuilder().addComponents(prizesInput));

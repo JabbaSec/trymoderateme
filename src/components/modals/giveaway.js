@@ -13,6 +13,7 @@ module.exports = {
   async execute(interaction, client) {
     const amount = interaction.fields.getTextInputValue("modalWinnerAmount");
     const prizes = interaction.fields.getTextInputValue("modalPrizes").split('\n');
+    const description = interaction.fields.getTextInputValue("modalDescription");
 
     const date = Math.round(
       new Date(interaction.fields.getTextInputValue("modalDuration")).getTime() /
@@ -24,6 +25,10 @@ module.exports = {
     .setTitle(`Official TryHackMe Giveaway`)
     .setFields([
       {
+        name: '\u200B',
+        value: `${description}`
+      },
+      {
         name: `When will it end? (your local time)`,
         value: `<t:${date}:f>`,
       },
@@ -33,10 +38,10 @@ module.exports = {
       }
     ]);
 
-    prizes.forEach((prize) => {
+    prizes.forEach((prize, i) => {
       giveawayEmbed.addFields({
-        name: `${prize}`,
-        value: `\u200B`,
+        name: `Prize #${i+1}`,
+        value: `${prize}`,
       });
     });
 
@@ -44,6 +49,11 @@ module.exports = {
       .setLabel("Join giveaway")
       .setCustomId("giveaway-join")
       .setStyle(ButtonStyle.Primary);
+
+      var timerId = setTimeout(async () => {
+        console.log('Giveaway over!');
+      }, `${date - Date.now()}`);
+
 
     await interaction.reply({ embeds: [giveawayEmbed],
       components: [new ActionRowBuilder().addComponents(button)],
