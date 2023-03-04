@@ -32,7 +32,10 @@ module.exports = {
       }
 
       const messageHadAttachment = message.attachments.first()
-      if (messageHadAttachment) deleteEmbed.setImage(messageHadAttachment.proxyURL)
+      if (messageHadAttachment) {
+        deleteEmbed.setImage(messageHadAttachment.proxyURL)
+        deleteEmbed.addFields({name: `Attachment URL:`, value: `${messageHadAttachment.proxyURL}`})
+      }
   
 
     client.channels.cache
