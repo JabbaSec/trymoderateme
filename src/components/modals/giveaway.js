@@ -7,6 +7,8 @@ const {
 } = require("discord.js");
 
 const Giveaway = require("../../events/mongo/schema/giveaway");
+const Data = require("../../events/mongo/schema/data");
+const { default: mongoose } = require("mongoose");
 
 var winners = [];
 
@@ -53,23 +55,32 @@ module.exports = {
       async function chooseWinner() {
         const count = await Giveaway.count().exec();
         const random = Math.floor(Math.random() * count);
-        const result = await Giveaway.findOne().skip(random).exec();
+        const result = await Giveaway.findOneAndDelete().skip(random).exec();
         return result;
       }
 
       var delay = date.getTime() - Date.now();
       var timerId = setTimeout(() => {
-        console.log(1)
         const promises = [];
         for (let i = 0; i < parseInt(amount); i++) {
           promises.push(chooseWinner());
         }
 
         Promise.all(promises).then((results) => {
-          winners = results.map((result) => result.userID);
-          interaction.followUp({ content: `Winner Winner Chicken Dinner ${winners}` });
+          winners = results.map((result) => `\n<@${result.userID}>`);
+
+          interaction.followUp({ content: `Giveaway over! Congratulations to the winners:\n${winners}` });
         });
       }, delay);
+
+      newData = await new Data({
+        _id: mongoose.Types.ObjectId(),
+        id: timerId,
+        length: delay,
+        amount: amount,
+      });
+
+      await newData.save().catch(console.error);
 
     await interaction.reply({ embeds: [giveawayEmbed],
       components: [new ActionRowBuilder().addComponents(button)],

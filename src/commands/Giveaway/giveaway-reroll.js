@@ -6,8 +6,8 @@ const { default: mongoose } = require("mongoose");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("stop")
-    .setDescription("Stops the current giveaway."),
+    .setName("reroll")
+    .setDescription("Choose another winner for the Giveaway"),
   async execute(interaction, client) {
     let findGiveaway = await Data.findOne({});
 
@@ -22,13 +22,13 @@ module.exports = {
       clearTimeout(findGiveaway.id);
 
       const promises = [];
-      for (let i = 0; i < parseInt(findGiveaway.amount); i++) {
+      for (let i = 0; i < parseInt(1); i++) {
         promises.push(chooseWinner());
       }
 
       Promise.all(promises).then((results) => {
         winners = results.map((result) => `\n<@${result.userID}>`);
-        interaction.editReply({ content: `Giveaway over! Congratulations to the winners:\n${winners}` });
+        interaction.editReply({ content: `Rerolled! Here is a new winner:\n${winners}` });
       });
     }
   },
