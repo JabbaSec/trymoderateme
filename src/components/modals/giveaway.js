@@ -22,6 +22,14 @@ module.exports = {
     const description = interaction.fields.getTextInputValue("modalDescription");
     const date = new Date(interaction.fields.getTextInputValue("modalDuration"));
 
+    let findGiveaway = await Data.findOne({});
+
+    if (findGiveaway) {
+      clearTimeout(findGiveaway.id);
+      Giveaway.deleteMany({})
+      findGiveaway.delete();
+    }
+
     const giveawayEmbed = new EmbedBuilder()
     .setColor("#00ff00")
     .setTitle(`Official TryHackMe Giveaway`)
