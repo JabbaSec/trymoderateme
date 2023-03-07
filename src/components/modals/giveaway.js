@@ -60,6 +60,12 @@ module.exports = {
       .setCustomId("giveaway-join")
       .setStyle(ButtonStyle.Primary);
 
+    const dButton = new ButtonBuilder()
+      .setLabel("Join giveaway")
+      .setCustomId("giveaway-join")
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(true);
+
       async function chooseWinner() {
         const count = await Giveaway.count().exec();
         const random = Math.floor(Math.random() * count);
@@ -74,9 +80,10 @@ module.exports = {
           promises.push(chooseWinner());
         }
 
+        interaction.editReply({embed: [giveawayEmbed], components: [new ActionRowBuilder().addComponents(dButton)]});
+
         Promise.all(promises).then((results) => {
           winners = results.map((result) => `\n<@${result.userID}>`);
-
           interaction.followUp({ content: `Giveaway over! Congratulations to the winners:\n${winners}` });
         });
       }, delay);
