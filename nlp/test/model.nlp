@@ -1,0 +1,340 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "nlu": {
+      "useNoneFeature": false
+    },
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager",
+      "useNoneFeature": false
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "useNoneFeature": false,
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "com,googl": {
+            "intent": "url.safe",
+            "domain": "default"
+          },
+          "com,twitter": {
+            "intent": "url.safe",
+            "domain": "default"
+          },
+          "com,instagram": {
+            "intent": "url.safe",
+            "domain": "default"
+          },
+          "com,discord": {
+            "intent": "url.safe",
+            "domain": "default"
+          },
+          "discord,gg,https,wgp8tpdjbi": {
+            "intent": "url.phishing",
+            "domain": "default"
+          },
+          "discord,e-sexi,gg,https": {
+            "intent": "url.phishing",
+            "domain": "default"
+          },
+          "discord,gg,https,uhanebyzbp": {
+            "intent": "url.phishing",
+            "domain": "default"
+          },
+          "discord,gg,https,qkucfk4g": {
+            "intent": "url.phishing",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "url.safe": "default",
+          "url.phishing": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "google.com",
+            "intent": "url.safe"
+          },
+          {
+            "domain": "default",
+            "utterance": "twitter.com",
+            "intent": "url.safe"
+          },
+          {
+            "domain": "default",
+            "utterance": "instagram.com",
+            "intent": "url.safe"
+          },
+          {
+            "domain": "default",
+            "utterance": "discord.com",
+            "intent": "url.safe"
+          },
+          {
+            "domain": "default",
+            "utterance": "https://discord.gg/wGp8TpDjby",
+            "intent": "url.phishing"
+          },
+          {
+            "domain": "default",
+            "utterance": "https://discord.gg/e-sexies",
+            "intent": "url.phishing"
+          },
+          {
+            "domain": "default",
+            "utterance": "https://discord.gg/uhaNEBYZBP",
+            "intent": "url.phishing"
+          },
+          {
+            "domain": "default",
+            "utterance": "https://discord.gg/QKuCFK4G",
+            "intent": "url.phishing"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "googl": 1,
+              "com": 1,
+              "twitter": 1,
+              "instagram": 1,
+              "discord": 1,
+              "https": 1,
+              "gg": 1,
+              "wgp8tpdjbi": 1,
+              "e-sexi": 1,
+              "uhanebyzbp": 1,
+              "qkucfk4g": 1
+            },
+            "intents": {
+              "url.safe": 1,
+              "url.phishing": 1
+            },
+            "intentFeatures": {
+              "url.safe": {
+                "googl": 1,
+                "com": 1,
+                "twitter": 1,
+                "instagram": 1,
+                "discord": 1
+              },
+              "url.phishing": {
+                "https": 1,
+                "discord": 1,
+                "gg": 1,
+                "wgp8tpdjbi": 1,
+                "e-sexi": 1,
+                "uhanebyzbp": 1,
+                "qkucfk4g": 1
+              }
+            },
+            "featuresToIntent": {
+              "googl": [
+                "url.safe"
+              ],
+              "com": [
+                "url.safe"
+              ],
+              "twitter": [
+                "url.safe"
+              ],
+              "instagram": [
+                "url.safe"
+              ],
+              "discord": [
+                "url.safe",
+                "url.phishing"
+              ],
+              "https": [
+                "url.phishing"
+              ],
+              "gg": [
+                "url.phishing"
+              ],
+              "wgp8tpdjbi": [
+                "url.phishing"
+              ],
+              "e-sexi": [
+                "url.phishing"
+              ],
+              "uhanebyzbp": [
+                "url.phishing"
+              ],
+              "qkucfk4g": [
+                "url.phishing"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "useNoneFeature": false,
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "googl",
+                "com",
+                "twitter",
+                "instagram",
+                "discord",
+                "https",
+                "gg",
+                "wgp8tpdjbi",
+                "e-sexi",
+                "uhanebyzbp",
+                "qkucfk4g"
+              ],
+              "intents": [
+                "url.safe",
+                "url.phishing"
+              ],
+              "perceptrons": [
+                [
+                  1.7849879264831543,
+                  9.088120460510254,
+                  1.8636317253112793,
+                  1.846142053604126,
+                  1.4489206075668335,
+                  -2.1794984340667725,
+                  -2.1794984340667725,
+                  -0.5688262581825256,
+                  -0.547534167766571,
+                  -0.5353640913963318,
+                  -0.5146275162696838,
+                  3.458027582422953
+                ],
+                [
+                  -0.20205259323120117,
+                  -3.1948435306549072,
+                  -0.17534270882606506,
+                  -0.15207086503505707,
+                  2.3778584003448486,
+                  4.910791873931885,
+                  4.910791873931885,
+                  1.198218822479248,
+                  1.2687729597091675,
+                  1.2391357421875,
+                  1.2037289142608643,
+                  0.8560207246491804
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "google.com"
+      ],
+      [
+        "en",
+        "twitter.com"
+      ],
+      [
+        "en",
+        "instagram.com"
+      ],
+      [
+        "en",
+        "discord.com"
+      ],
+      [
+        "en",
+        "https://discord.gg/wGp8TpDjby"
+      ],
+      [
+        "en",
+        "https://discord.gg/e-sexies"
+      ],
+      [
+        "en",
+        "https://discord.gg/uhaNEBYZBP"
+      ],
+      [
+        "en",
+        "https://discord.gg/QKuCFK4G"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "url.phishing": [
+          {
+            "answer": "true"
+          }
+        ],
+        "url.safe": [
+          {
+            "answer": "false"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
