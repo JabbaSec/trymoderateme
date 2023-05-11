@@ -7,7 +7,7 @@ const fs = require("fs");
 const client = new Client({
   intents: [
     GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildBans,
+    GatewayIntentBits.GuildModeration,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent,
