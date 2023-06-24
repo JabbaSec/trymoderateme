@@ -41,7 +41,7 @@ module.exports = {
     }
 
     // Check if the message was edited before deletion
-    if (client.editedMessages.has(message.id)) {
+    if (client.editedMessages && client.editedMessages.has(message.id)) {
       deleteEmbed.addFields({
         name: `Original Message`,
         value: `${client.editedMessages.get(message.id).substring(0, 1023)}`,
