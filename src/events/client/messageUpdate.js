@@ -1,43 +1,18 @@
-const { EmbedBuilder } = require("discord.js");
-require("dotenv").config();
+const { Collection } = require("discord.js");
+
+// Create a new collection for storing the old message content
+const editedMessages = new Collection();
 
 module.exports = {
   name: "messageUpdate",
-
   async execute(oldMessage, newMessage, client) {
-    return;
-
+    // Ignore messages from bots
     if (oldMessage.author.bot) return;
 
-    // if (oldMessage.content.replace(/[&\/\\#,+()$~%.'"`_-:*?<>{}\s+]/g, '') == newMessage.content.replace(/[&\/\\#,+()$~%.'"`_-:*?<>{}\s+]/g, '')) return;
+    // Store the old message content in the collection
+    editedMessages.set(oldMessage.id, oldMessage.content);
 
-    const editEmbed = new EmbedBuilder()
-      .setAuthor({
-        name: `${newMessage.author.tag}`,
-        iconURL: newMessage.author.displayAvatarURL(),
-      })
-      .setColor("#ffa500")
-      .setThumbnail(`${newMessage.author.displayAvatarURL()}`)
-      .setTitle(`:recycle: Edited Message`)
-      .setFooter({ text: `${newMessage.createdAt}` })
-      .setFields([
-        {
-          name: `Channel`,
-          value: `<#${newMessage.channel.id}>`,
-        },
-        {
-          name: `Original Message`,
-          value: `${oldMessage.content}`,
-        },
-        {
-          name: `Edited Message`,
-          value: `${newMessage.content}`,
-        },
-      ]);
-
-    client.channels.cache
-      .get(process.env.DELETED_MESSAGES)
-      .send({ embeds: [editEmbed] })
-      .catch((err) => console.log("[EDIT] Error with sending the embed."));
+    // Attach the collection to the client so it can be accessed in other events
+    client.editedMessages = editedMessages;
   },
 };

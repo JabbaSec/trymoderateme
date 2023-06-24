@@ -23,20 +23,33 @@ module.exports = {
         },
       ]);
 
-      const messageHadText = message.content;
-      if (messageHadText) {
-        deleteEmbed.addFields({
-          name: `Message`,
-          value: `${message.content.substring(0,1023)}`,
-        })
-      }
+    const messageHadText = message.content;
+    if (messageHadText) {
+      deleteEmbed.addFields({
+        name: `Message`,
+        value: `${message.content.substring(0, 1023)}`,
+      });
+    }
 
-      const messageHadAttachment = message.attachments.first()
-      if (messageHadAttachment) {
-        deleteEmbed.setImage(messageHadAttachment.proxyURL)
-        deleteEmbed.addFields({name: `Attachment URL:`, value: `${messageHadAttachment.proxyURL}`})
-      }
-  
+    const messageHadAttachment = message.attachments.first();
+    if (messageHadAttachment) {
+      deleteEmbed.setImage(messageHadAttachment.proxyURL);
+      deleteEmbed.addFields({
+        name: `Attachment URL:`,
+        value: `${messageHadAttachment.proxyURL}`,
+      });
+    }
+
+    // Check if the message was edited before deletion
+    if (client.editedMessages.has(message.id)) {
+      deleteEmbed.addFields({
+        name: `Original Message`,
+        value: `${client.editedMessages.get(message.id).substring(0, 1023)}`,
+      });
+
+      // Remove the entry from the collection
+      client.editedMessages.delete(message.id);
+    }
 
     client.channels.cache
       .get(process.env.DELETED_MESSAGES)
