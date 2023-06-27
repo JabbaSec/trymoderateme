@@ -41,7 +41,7 @@ module.exports = {
       } catch (error) {
         console.error(error);
       }
-    } else if (interaction.isSelectMenu()) {
+    } else if (interaction.isStringSelectMenu()) {
       const { dropdowns } = client;
       const { customId } = interaction;
 
