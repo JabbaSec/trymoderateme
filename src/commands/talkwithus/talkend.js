@@ -69,7 +69,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      await interaction.reply({
+      await interaction.editReply({
         content: "An error occurred while trying to end the talk.",
         ephemeral: true,
       });
