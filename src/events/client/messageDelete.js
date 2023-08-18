@@ -47,9 +47,9 @@ module.exports = {
     //     value: `${client.editedMessages.get(message.id).substring(0, 1023)}`,
     //   });
 
-      // Remove the entry from the collection
-      client.editedMessages.delete(message.id);
-    }
+    //   // Remove the entry from the collection
+    //   client.editedMessages.delete(message.id);
+    // }
 
     client.channels.cache
       .get(process.env.DELETED_MESSAGES)
