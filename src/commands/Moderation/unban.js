@@ -22,7 +22,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
+    if (interaction.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
 
@@ -53,7 +53,7 @@ module.exports = {
       });
     } else {
       await interaction.editReply({
-        content: `Nice try! You are not a moderator`,
+        content: `Nice try! You are not an administrator`,
         ephemeral: true,
       });
     }

@@ -57,7 +57,7 @@ module.exports = {
         .catch((err) => console.log("[NOTES] Error with sending embed."));
 
       await interaction.editReply({
-        content: `Note has successfully been added.`,
+        content: `Note has successfully been added to ${user.tag}.`,
       });
 
       console.log(newNote);
