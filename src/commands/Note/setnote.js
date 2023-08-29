@@ -42,11 +42,11 @@ module.exports = {
         })
         .setColor("#ffff00")
         .setThumbnail(`${user.displayAvatarURL()}`)
-        .setTitle(`:pencil2: Added Note ${user.tag}`)
+        .setTitle(`:pencil2: Note (${user.id})`)
         .setFooter({ text: `${newNote._id}` })
         .setFields([
           {
-            name: `${user.id}`,
+            name: `${user.tag}`,
             value: `${note}`,
           },
         ]);
