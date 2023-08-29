@@ -42,7 +42,7 @@ module.exports = {
         })
         .setColor("#ffff00")
         .setThumbnail(`${user.displayAvatarURL()}`)
-        .setTitle(":pencil2: Note")
+        .setTitle(`:pencil2: Note ${user.id}`)
         .setFooter({ text: `${newNote._id}` })
         .setFields([
           {
