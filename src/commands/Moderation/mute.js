@@ -160,7 +160,7 @@ module.exports = {
         .send({
           content: `:mute: You have been muted!\nReason: ${reason}\nDuration: ${ms(
             ms(duration, { long: true })
-          )}\nIf you think this was a mistake, please contact Hydragyrum#4726`,
+          )}\nIf you think this was a mistake, please contact a TryHackMe discord administrator.`,
         })
         .catch((err) =>
           interaction.followUp({ content: `[MUTE] I cannot DM that user.` })
