@@ -65,8 +65,6 @@ module.exports = {
         ])
         .setColor("#0099ff");
 
-      message.channel.send({ embeds: [embed] });
-
       await interaction.editReply({
         embeds: [embed],
       });
