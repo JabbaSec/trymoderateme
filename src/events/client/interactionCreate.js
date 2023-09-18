@@ -77,6 +77,7 @@ module.exports = {
       if (!contextCommand) return;
 
       try {
+        await interaction.deferReply();
         await contextCommand.execute(interaction, client);
       } catch (error) {
         console.error(error);
