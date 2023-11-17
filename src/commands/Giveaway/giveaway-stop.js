@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 const Data = require("../../events/mongo/schema/data");
 const Giveaway = require("../../events/mongo/schema/giveaway");
