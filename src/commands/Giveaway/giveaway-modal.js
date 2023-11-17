@@ -16,7 +16,7 @@ module.exports = {
     const modal = new ModalBuilder()
       .setCustomId("giveaway-modal")
       .setTitle("Giveaway Setup");
-      
+
     const descriptionInput = new TextInputBuilder()
       .setCustomId("modalDescription")
       .setLabel("Add an announcement to your giveaway!")

@@ -5,15 +5,16 @@ const { default: mongoose } = require("mongoose");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("cancel")
-    .setDescription("Stops the current giveaway."),
+    .setDescription("Stops the current giveaway.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     let findGiveaway = await Data.findOne({});
 
     if (findGiveaway) {
-    clearTimeout(findGiveaway.id);
-    findGiveaway.delete();
-    
-    interaction.editReply({ content: `Giveaway cancelled.` });
+      clearTimeout(findGiveaway.id);
+      findGiveaway.delete();
+
+      interaction.editReply({ content: `Giveaway cancelled.` });
     }
   },
 };

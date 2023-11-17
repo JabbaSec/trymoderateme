@@ -7,7 +7,8 @@ const { default: mongoose } = require("mongoose");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reroll")
-    .setDescription("Choose another winner for the Giveaway"),
+    .setDescription("Choose another winner for the Giveaway")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     let findGiveaway = await Data.findOne({});
 
@@ -28,7 +29,9 @@ module.exports = {
 
       Promise.all(promises).then((results) => {
         winners = results.map((result) => `\n<@${result.userID}>`);
-        interaction.editReply({ content: `Rerolled! Here is a new winner:\n${winners}` });
+        interaction.editReply({
+          content: `Rerolled! Here is a new winner:\n${winners}`,
+        });
       });
     }
   },

@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("rules")
-    .setDescription("Returns all the rules as separate embeds"),
+    .setDescription("Returns all the rules as separate embeds")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     rules = require(`./rules.json`);
 

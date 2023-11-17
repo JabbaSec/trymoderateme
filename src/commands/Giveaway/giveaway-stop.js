@@ -7,7 +7,8 @@ const { default: mongoose } = require("mongoose");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("stop")
-    .setDescription("Stops the current giveaway."),
+    .setDescription("Stops the current giveaway.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
     let findGiveaway = await Data.findOne({});
 
@@ -28,7 +29,9 @@ module.exports = {
 
       Promise.all(promises).then((results) => {
         winners = results.map((result) => `\n<@${result.userID}>`);
-        interaction.editReply({ content: `Giveaway over! Congratulations to the winners:\n${winners}` });
+        interaction.editReply({
+          content: `Giveaway over! Congratulations to the winners:\n${winners}`,
+        });
       });
     }
   },
