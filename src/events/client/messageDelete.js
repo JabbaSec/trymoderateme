@@ -14,7 +14,7 @@ module.exports = {
       })
       .setColor("#ff0000")
       .setThumbnail(`${message.author.displayAvatarURL()}`)
-      .setTitle(`:wastebasket: Deleted Message`)
+      .setTitle(`:wastebasket: Deleted Message (${message.author.id})`)
       .setFooter({ text: `${message.createdAt}` })
       .setFields([
         {
