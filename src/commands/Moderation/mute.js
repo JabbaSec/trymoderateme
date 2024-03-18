@@ -37,9 +37,8 @@ module.exports = {
 
   async execute(interaction, client) {
     if (
-      interaction.member.roles.cache.has(
-        process.env.MOD_ROLE_ID || process.env.TMOD_ROLE_ID
-      )
+      interaction.member.roles.cache.has(process.env.MOD_ROLE_ID) ||
+      interaction.member.roles.cache.has(process.env.TMOD_ROLE_ID)
     ) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
