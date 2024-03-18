@@ -18,7 +18,11 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
+    if (
+      interaction.member.roles.cache.has(
+        process.env.MOD_ROLE_ID || process.env.TMOD_ROLE_ID
+      )
+    ) {
       const user = interaction.options.getUser("user");
 
       let findNotes = await Note.find({ userID: user.id });

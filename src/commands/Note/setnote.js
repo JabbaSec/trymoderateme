@@ -21,7 +21,11 @@ module.exports = {
       option.setName("note").setDescription("Note details.").setRequired(true)
     ),
   async execute(interaction, client) {
-    if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
+    if (
+      interaction.member.roles.cache.has(
+        process.env.MOD_ROLE_ID || process.env.TMOD_ROLE_ID
+      )
+    ) {
       const user = interaction.options.getUser("user");
       const note = interaction.options.getString("note");
 
