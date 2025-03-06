@@ -15,7 +15,11 @@ module.exports = {
       if (!interaction.guild) return;
 
       try {
-        if (commandName == "announce" || commandName == "giveaway") {
+        if (
+          commandName == "announce" ||
+          commandName == "giveaway" ||
+          commandName == "report"
+        ) {
           await command.execute(interaction, client);
         } else {
           await interaction.deferReply();
@@ -80,7 +84,7 @@ module.exports = {
         await interaction.deferReply();
         await contextCommand.execute(interaction, client);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
   },

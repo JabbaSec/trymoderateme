@@ -37,7 +37,7 @@ module.exports = {
 
       await interaction.showModal(modal);
     } else {
-      await interaction.editReply({
+      await interaction.reply({
         content: `Nice try! You are not an administrator`,
         ephemeral: true,
       });

@@ -12,6 +12,12 @@ module.exports = {
     .setName("Check URLs")
     .setType(ApplicationCommandType.Message),
   async execute(interaction, client) {
+    await interaction.editReply({
+      content:
+        "This command has been disabled. Please contact a community moderator if you think the link is malicious.",
+    });
+    return;
+
     const API_URL = `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT}/urlscanner/scan`;
     const API_TOKEN = process.env.CLOUDFLARE_TOKEN;
     const HEADERS = {
