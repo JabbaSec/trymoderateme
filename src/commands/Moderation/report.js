@@ -158,5 +158,59 @@ module.exports = {
         ephemeral: true,
       });
     }
+
+    if (subcommand === "message") {
+      const reportedUser = interaction.options.getUser("user");
+      const messageLink = interaction.options.getString("message_link");
+      const reason = interaction.options.getString("reason");
+
+      if (!DISCORD_MESSAGE_LINK_REGEX.test(messageLink)) {
+        return interaction.reply({
+          content:
+            "Invalid message link! Please provide a **valid Discord message link.**",
+          ephemeral: true,
+        });
+      }
+
+      const reportEmbed = new EmbedBuilder()
+        .setAuthor({
+          name: `${reporter.tag}`,
+          iconURL: reporter.displayAvatarURL(),
+        })
+        .setColor("#ff0000")
+        .setThumbnail(reportedUser.displayAvatarURL())
+        .setTitle(`🚨 Message Report: \`${reportedUser.tag}\``)
+        .setFields([
+          {
+            name: "Reporter",
+            value: `\`${reporter.tag}\` (${reporter.id})`,
+            inline: true,
+          },
+          {
+            name: "Reported User",
+            value: `\`${reportedUser.tag}\` (${reportedUser.id})`,
+            inline: true,
+          },
+          {
+            name: "Channel",
+            value: `<#${interaction.channel.id}>`,
+            inline: true,
+          },
+          {
+            name: "Message",
+            value: `${messageLink}`,
+            inline: true,
+          },
+          { name: "Reason", value: `\`${reason}\`` },
+          { name: "Timestamp", value: `<t:${timestamp}:F>` },
+        ]);
+
+      await reportChannel.send({ content: mention, embeds: [reportEmbed] });
+
+      return interaction.reply({
+        content: "Your report has been submitted to the moderators.",
+        ephemeral: true,
+      });
+    }
   },
 };
