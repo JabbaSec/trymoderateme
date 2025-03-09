@@ -18,7 +18,12 @@ module.exports = {
         .setCustomId("announce-modal")
         .setTitle("Announcement");
 
-      const roomInput = new TextInputBuilder()
+      const roomTitleInput = new TextInputBuilder()
+        .setCustomId("modalRoomTitle")
+        .setLabel("Room Title")
+        .setStyle(TextInputStyle.Short);
+
+      const roomCodeInput = new TextInputBuilder()
         .setCustomId("modalRoomCode")
         .setLabel("Room Code")
         .setRequired(true)
@@ -30,7 +35,8 @@ module.exports = {
         .setRequired(false)
         .setStyle(TextInputStyle.Paragraph);
 
-      modal.addComponents(new ActionRowBuilder().addComponents(roomInput));
+      modal.addComponents(new ActionRowBuilder().addComponents(roomCodeInput));
+      modal.addComponents(new ActionRowBuilder().addComponents(roomTitleInput));
       modal.addComponents(
         new ActionRowBuilder().addComponents(descriptionInput)
       );
