@@ -7,13 +7,15 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 
+const { hasAdminAccess } = require("../../utils/permissions");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("announce")
     .setDescription("Announce something using the bot!")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, client) {
-    if (interaction.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
+    if (hasAdminAccess(interaction)) {
       const modal = new ModalBuilder()
         .setCustomId("announce-modal")
         .setTitle("Announcement");

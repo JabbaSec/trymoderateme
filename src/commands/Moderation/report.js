@@ -102,11 +102,10 @@ module.exports = {
     }
 
     cooldowns.set(reporter.id, now); // Set cooldown timestamp
-    setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION); // Remove cooldown after 10 minutes
+    setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION);
 
     const timestamp = Math.floor(Date.now() / 1000);
 
-    // Check if @here can be used
     let mention = "";
     if (
       !alertCooldown.has(reportChannel.id) ||

@@ -4,6 +4,8 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 
+const { hasAdminAccess } = require("../../utils/permissions");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("unban")
@@ -22,7 +24,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    if (interaction.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
+    if (hasAdminAccess(interaction)) {
       const user = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
 

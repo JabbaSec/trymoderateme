@@ -4,6 +4,8 @@ const {
   PermissionsBitField,
 } = require("discord.js");
 
+const { hasAdminAccess } = require("../../utils/permissions");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("permission")
@@ -12,11 +14,15 @@ module.exports = {
   async execute(interaction, client) {
     const role = await interaction.guild.roles
       .fetch(process.env.MOD_ROLE_ID)
-      .catch(console.error);
+      .catch(console.log);
 
     if (interaction.member.roles.cache.has(process.env.MOD_ROLE_ID)) {
       await interaction.editReply({
         content: `You have the ${role.name} role.`,
+      });
+    } else if (hasAdminAccess(interaction)) {
+      await interaction.editReply({
+        content: `You are an administrator.`,
       });
     } else {
       await interaction.editReply({
