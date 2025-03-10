@@ -4,87 +4,75 @@ module.exports = {
   name: "interactionCreate",
 
   async execute(interaction, client) {
-    if (interaction.isChatInputCommand()) {
-      const { commands } = client;
-      const { commandName } = interaction;
+    const loggingChannel = interaction.guild?.channels.cache.get(
+      process.env.BOT_LOGGING
+    );
 
-      const command = commands.get(commandName);
+    try {
+      if (interaction.isChatInputCommand()) {
+        const command = client.commands.get(interaction.commandName);
+        if (!command) return;
+        if (!interaction.guild) return;
 
-      if (!command) return;
-
-      if (!interaction.guild) return;
-
-      try {
         if (
-          commandName == "announce" ||
-          commandName == "giveaway" ||
-          commandName == "report"
+          ["announce", "giveaway", "report"].includes(interaction.commandName)
         ) {
           await command.execute(interaction, client);
         } else {
           await interaction.deferReply();
           await command.execute(interaction, client);
         }
-      } catch (error) {
-        console.error(error);
-        await interaction.reply({
-          content: "An error occurred while executing this command.",
-          ephemeral: true,
-        });
-      }
-    } else if (interaction.isButton()) {
-      const { buttons } = client;
-      const { customId } = interaction;
-
-      const button = buttons.get(customId);
-
-      if (!button) return new Error("There is no button with this custom ID.");
-
-      try {
+      } else if (interaction.isButton()) {
+        const button = client.buttons.get(interaction.customId);
+        if (!button) return;
         await button.execute(interaction, client);
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (interaction.isStringSelectMenu()) {
-      const { dropdowns } = client;
-      const { customId } = interaction;
-
-      const dropdown = dropdowns.get(customId);
-
-      if (!dropdown)
-        return new Error("There is no dropdown with this custom ID.");
-
-      try {
+      } else if (interaction.isStringSelectMenu()) {
+        const dropdown = client.dropdowns.get(interaction.customId);
+        if (!dropdown) return;
         await dropdown.execute(interaction, client);
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (interaction.type == InteractionType.ModalSubmit) {
-      const { modals } = client;
-      const { customId } = interaction;
-
-      const modal = modals.get(customId);
-
-      if (!modal) return new Error("There is no modal with this custom ID.");
-
-      try {
+      } else if (interaction.type === InteractionType.ModalSubmit) {
+        const modal = client.modals.get(interaction.customId);
+        if (!modal) return;
         await modal.execute(interaction, client);
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (interaction.isContextMenuCommand()) {
-      const { commands } = client;
-      const { commandName } = interaction;
-
-      const contextCommand = commands.get(commandName);
-
-      if (!contextCommand) return;
-
-      try {
+      } else if (interaction.isContextMenuCommand()) {
+        const contextCommand = client.commands.get(interaction.commandName);
+        if (!contextCommand) return;
         await interaction.deferReply();
         await contextCommand.execute(interaction, client);
-      } catch (error) {
-        console.log(error);
+      }
+    } catch (error) {
+      console.log("Error encountered:", error);
+
+      if (!interaction.replied && !interaction.deferred) {
+        try {
+          await interaction.reply({
+            content:
+              "An error occurred while executing this command. Please try again later.",
+            ephemeral: true,
+          });
+        } catch (err) {
+          console.log("Failed to reply to interaction:", err);
+        }
+      } else {
+        try {
+          await interaction.followUp({
+            content:
+              "An error occurred while executing this command. Please try again later.",
+            ephemeral: true,
+          });
+        } catch (err) {
+          console.log("Failed to follow up on interaction:", err);
+        }
+      }
+
+      if (loggingChannel) {
+        try {
+          await loggingChannel.send({
+            content: `<@270975958511517697> The bot encountered an error while handling an interaction. Please check the logs.`,
+          });
+        } catch (err) {
+          console.log("Failed to send message to logging channel:", err);
+        }
       }
     }
   },

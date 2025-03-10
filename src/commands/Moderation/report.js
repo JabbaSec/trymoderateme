@@ -101,7 +101,7 @@ module.exports = {
       }
     }
 
-    cooldowns.set(reporter.id, now); // Set cooldown timestamp
+    cooldowns.set(reporter.id, now);
     setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION);
 
     const timestamp = Math.floor(Date.now() / 1000);
