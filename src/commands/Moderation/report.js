@@ -101,27 +101,27 @@ module.exports = {
       }
     }
 
-    cooldowns.set(reporter.id, now);
-    setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION);
-
     const timestamp = Math.floor(Date.now() / 1000);
-
-    let mention = "";
-    if (
-      !alertCooldown.has(reportChannel.id) ||
-      now - alertCooldown.get(reportChannel.id) > ALERT_COOLDOWN_DURATION
-    ) {
-      mention = "@here";
-      alertCooldown.set(reportChannel.id, now);
-      setTimeout(
-        () => alertCooldown.delete(reportChannel.id),
-        ALERT_COOLDOWN_DURATION
-      );
-    }
 
     if (subcommand === "user") {
       const reportedUser = interaction.options.getUser("user");
       const reason = interaction.options.getString("reason");
+
+      cooldowns.set(reporter.id, now);
+      setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION);
+
+      let mention = "";
+      if (
+        !alertCooldown.has(reportChannel.id) ||
+        now - alertCooldown.get(reportChannel.id) > ALERT_COOLDOWN_DURATION
+      ) {
+        mention = "@here";
+        alertCooldown.set(reportChannel.id, now);
+        setTimeout(
+          () => alertCooldown.delete(reportChannel.id),
+          ALERT_COOLDOWN_DURATION
+        );
+      }
 
       const reportEmbed = new EmbedBuilder()
         .setAuthor({
@@ -170,6 +170,22 @@ module.exports = {
             "Invalid message link! Please provide a **valid Discord message link.**",
           ephemeral: true,
         });
+      }
+
+      cooldowns.set(reporter.id, now);
+      setTimeout(() => cooldowns.delete(reporter.id), COOLDOWN_DURATION);
+
+      let mention = "";
+      if (
+        !alertCooldown.has(reportChannel.id) ||
+        now - alertCooldown.get(reportChannel.id) > ALERT_COOLDOWN_DURATION
+      ) {
+        mention = "@here";
+        alertCooldown.set(reportChannel.id, now);
+        setTimeout(
+          () => alertCooldown.delete(reportChannel.id),
+          ALERT_COOLDOWN_DURATION
+        );
       }
 
       const reportEmbed = new EmbedBuilder()
